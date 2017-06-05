@@ -28,6 +28,31 @@ while True:
     print('使用字母来自：',required,'   ','搜索单词长度：',number)
     print(' ')
     
+    if number < 5:
+        smldict = open("smallwords.txt","r")
+        word3 = smldict.readline().strip().split(",")
+        word4 = smldict.readline().strip().split(",")
+        smldict.close()
+        if number == 3:
+            dicts = word3
+        elif number == 4:
+            dicts = word4
+            
+        print('推荐单词：',end='')
+
+        line_len = 0
+        for words in dicts:
+            words=words.lower()
+            if len(words) == number:
+                if all(a in required for a in words):
+                    if all(words.count(a) <= required.count(a) for a in words):
+                        line_len += 1
+                        print(words,end='  ')
+                        if line_len % 8 == 0:
+                            print(' ')
+                
+        print(' ')
+        print(' ')
     with open("dictionary.txt","r") as dictionary:
         line_len = 0
         for line in dictionary:
